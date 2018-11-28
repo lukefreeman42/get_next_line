@@ -1,5 +1,3 @@
-#include "libft.h"
-#include "get_next_line.c"
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -14,7 +12,7 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	while (get_next_line(fd, line))
 	{
-		printf("%s", *line);
+		printf("%s\n", *line);
 		free(*line);
 	}
 	return (0);

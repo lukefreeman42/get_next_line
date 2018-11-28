@@ -21,7 +21,7 @@ void	ft_strrev(char *str)
 	len = ft_strlen(str);
 	while (i < len / 2)
 	{
-		ll_swap(str + i, str + len - i - 1);
+		ft_swap(str + i, str + len - i - 1);
 		i++;
 	}
 }

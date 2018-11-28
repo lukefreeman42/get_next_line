@@ -29,7 +29,7 @@ static char	*dgts_to_str(int n, int base, char *str, void *p)
 	}
 	if (flag)
 		*str++ = '-';
-	ll_strrev((char*)p);
+	ft_strrev((char*)p);
 	return (str);
 }
 
