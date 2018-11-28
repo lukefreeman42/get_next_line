@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_numodgt_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 14:41:28 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/07 14:41:29 by llelias          ###   ########.fr       */
+/*   Created: 2018/11/13 17:12:53 by llelias           #+#    #+#             */
+/*   Updated: 2018/11/13 17:13:01 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+size_t		ft_numodgt_base(int n, int base)
 {
 	size_t len;
 
-	len = 0;
-	while (*str++ != '\0')
+	len = 1;
+	while (n /= base)
 		len++;
 	return (len);
 }

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isws.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 14:41:28 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/07 14:41:29 by llelias          ###   ########.fr       */
+/*   Created: 2018/11/08 18:39:06 by llelias           #+#    #+#             */
+/*   Updated: 2018/11/13 16:51:30 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+int		ft_isws(int c)
 {
-	size_t len;
-
-	len = 0;
-	while (*str++ != '\0')
-		len++;
-	return (len);
+	if (c == (int)' ' || c == (int)'\n' || c == (int)'\t' || c == (int)'\r'
+			|| c == (int)'\v' || c == (int)'\f')
+		return (1);
+	else
+		return (0);
 }

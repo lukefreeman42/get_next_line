@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_ctoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 14:41:28 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/07 14:41:29 by llelias          ###   ########.fr       */
+/*   Created: 2018/11/08 18:01:06 by llelias           #+#    #+#             */
+/*   Updated: 2018/11/13 16:45:45 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_ctoi(char c)
 {
-	size_t len;
-
-	len = 0;
-	while (*str++ != '\0')
-		len++;
-	return (len);
+	if (ft_isdigit(c))
+		return (c - 48);
+	else
+		return (c);
 }

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 14:41:28 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/07 14:41:29 by llelias          ###   ########.fr       */
+/*   Created: 2018/11/07 15:10:58 by llelias           #+#    #+#             */
+/*   Updated: 2018/11/07 15:13:27 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	size_t len;
+	void *p;
 
-	len = 0;
-	while (*str++ != '\0')
-		len++;
-	return (len);
+	p = (void*)s1;
+	s1 += ft_strlen(s1);
+	while (*s2)
+		*s1++ = *s2++;
+	*s1 = '\0';
+	return ((char*)p);
 }

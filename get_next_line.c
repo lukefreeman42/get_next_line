@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "get_next_line.h"
 
 int		read_n_store(const int fd, char *storage[])
 {
-	int		read_amnt;
+	int	read_amnt;
 	char	read_b[BUFF_SIZE + 1];
 	char	*garbage;
 

@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 14:41:28 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/07 14:41:29 by llelias          ###   ########.fr       */
+/*   Created: 2018/11/08 20:05:42 by llelias           #+#    #+#             */
+/*   Updated: 2018/11/10 19:00:30 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	size_t len;
+	int	i;
 
-	len = 0;
-	while (*str++ != '\0')
-		len++;
-	return (len);
+	i = 0;
+	if (!ft_strcmp(needle, ""))
+		return ((char*)haystack);
+	while (*haystack)
+	{
+		while (*(haystack + i) == *(needle + i))
+		{
+			if (*(needle + i + 1) == '\0')
+				return ((char*)haystack);
+			i++;
+		}
+		i = 0;
+		haystack++;
+	}
+	return (NULL);
 }

@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdup.c                                        :+:      :+:    :+:   */
+/*   ft_memrcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 09:34:25 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/26 21:38:40 by llelias          ###   ########.fr       */
+/*   Created: 2018/11/07 13:30:07 by llelias           #+#    #+#             */
+/*   Updated: 2018/11/17 18:51:11 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memdup(void *p, size_t n)
+void	*ft_memrcpy(void *dst, const void *src, size_t n)
 {
-	void *dup;
+	void *p;
 
-	dup = ft_memalloc(n);
-	dup = ft_memcpy(dup, p, n);
-	return (dup);
+	p = dst;
+	dst += n - 1;
+	src += n - 1;
+	while (n--)
+		*(u_int8_t*)dst-- = *(u_int8_t*)src--;
+	return (p);
 }

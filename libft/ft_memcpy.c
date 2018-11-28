@@ -6,7 +6,7 @@
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 22:42:40 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/26 21:35:53 by llelias          ###   ########.fr       */
+/*   Updated: 2018/11/17 16:06:18 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	p = dst;
 	while (n--)
-		*(uint8_t*)dst++ = *(uint8_t*)src++;
+		*(u_int8_t*)dst++ = *(u_int8_t*)src++;
 	return (p);
 }
