@@ -6,7 +6,7 @@
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:37:10 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/27 15:24:00 by llelias          ###   ########.fr       */
+/*   Updated: 2018/11/28 19:46:25 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int		read_n_store(const int fd, char *storage[])
 {
-	int	read_amnt;
+	int		read_amnt;
 	char	read_b[BUFF_SIZE + 1];
 	char	*garbage;
 
+	read_amnt = -2;
 	while (!ft_strchr(storage[fd], '\n') &&
 			(read_amnt = read(fd, read_b, BUFF_SIZE)) && read_amnt > 0)
 	{
@@ -60,6 +61,7 @@ int		get_next_line(const int fd, char **line)
 	int			line_status;
 	static char	*storage[MAX_FD];
 
+	read_status = -2;
 	if (fd < 0 || fd >= MAX_FD)
 		return (-1);
 	if (!storage[fd])
