@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 16:37:10 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/28 19:46:25 by llelias          ###   ########.fr       */
+/*   Created: 2018/11/30 07:34:12 by llelias           #+#    #+#             */
+/*   Updated: 2018/11/30 08:54:14 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,52 @@
 
 int		read_n_store(const int fd, char *storage[])
 {
-	int		read_amnt;
-	char	read_b[BUFF_SIZE + 1];
-	char	*garbage;
+	int		status;
+	char	rb[BUFF_SIZE + 1];
 
-	read_amnt = -2;
-	while (!ft_strchr(storage[fd], '\n') &&
-			(read_amnt = read(fd, read_b, BUFF_SIZE)) && read_amnt > 0)
+	status = -2;
+	while (!ft_strchr(storage[fd], '\n')
+			&& (status = read(fd, rb, BUFF_SIZE))
+			&& status > 0)
 	{
-		garbage = storage[fd];
-		read_b[read_amnt] = '\0';
-		storage[fd] = ft_strjoin(storage[fd], read_b);
-		free(garbage);
+		rb[BUFF_SIZE] = '\0';
+		storage[fd] = ft_fstrjoin(storage[fd], rb, 1);
 	}
-	return (read_amnt);
+	return (status);
 }
 
-int		store_line(const int fd, char *storage[], char **line)
+int		grab_n_line(const int fd, char *storage[], char **line)
 {
-	char	*nl_pointer;
-	char	*left;
-	char	*rght;
+	char	*nl_p;
+	char	*tmp;
 
-	if (!(nl_pointer = ft_strchr(storage[fd], '\n')))
+	tmp = storage[fd];
+	if ((nl_p = ft_strchr(storage[fd], '\n')))
 	{
-		left = ft_strdup(storage[fd]);
-		free(storage[fd]);
-		*line = left;
-		return (0);
-	}
-	else
-	{
-		*nl_pointer = '\0';
-		left = ft_strdup(storage[fd]);
-		rght = ft_strdup(storage[fd] + (int)ft_strlen(left) + 1);
-		free(storage[fd]);
-		*line = left;
-		storage[fd] = rght;
+		*nl_p = '\0';
+		storage[fd] = ft_strdup(++nl_p);
+		*line = ft_fstrdup(tmp);
 		return (1);
 	}
+	else
+		*line = ft_fstrdup(storage[fd]);
+	return (0);
 }
 
 int		get_next_line(const int fd, char **line)
 {
-	int			read_status;
-	int			line_status;
+	int			status;
 	static char	*storage[MAX_FD];
 
-	read_status = -2;
+	status = 0;
 	if (fd < 0 || fd >= MAX_FD)
 		return (-1);
 	if (!storage[fd])
-	{
 		storage[fd] = ft_strnew(0);
-	}
-	read_status = read_n_store(fd, storage);
-	if (read_status == -1)
+	status = read_n_store(fd, storage);
+	if (status == -1)
 		return (-1);
-	line_status = store_line(fd, storage, line);
-	if (line_status)
+	if ((status = grab_n_line(fd, storage, line)))
 		return (1);
-	else
-		return (0);
+	return (0);
 }
