@@ -6,7 +6,7 @@
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 07:34:12 by llelias           #+#    #+#             */
-/*   Updated: 2018/11/30 17:10:53 by llelias          ###   ########.fr       */
+/*   Updated: 2018/12/01 15:37:33 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		grab_n_line(const int fd, char *storage[], char **line)
 		*line = ft_fstrdup(tmp);
 		return (1);
 	}
-	else if (stroage[fd])
+	else if (storage[fd])
 		*line = ft_fstrdup(storage[fd]);
 	return (0);
 }
