@@ -6,7 +6,7 @@
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 10:23:55 by llelias           #+#    #+#             */
-/*   Updated: 2018/12/05 15:56:04 by llelias          ###   ########.fr       */
+/*   Updated: 2018/12/05 16:14:41 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int		get_next_line(int fd, char **line)
 {
 	static t_file	**b;
 	int				rs;
-	*b = grab_file(fd, b);
-	if (*b && *b->fd >= 0 && read_to_b(fd, *b) != -1)
-		return (grab_line(*b, line, rs));
+	*b = grab_file(fd, *b);
+	if (*b && ((*b)->fd) >= 0 && read_to_b(fd, *b) != -1)
+		return (grab_line(*b, line));
 	return (-1);
 }
