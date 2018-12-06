@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 	int linenum = 0; 
 	if (argc != 2)
 		return (-1);
-	while ((st = get_next_line(fd, &line)))
+	while (1 || (st = get_next_line(fd, &line)))
 	{
 		linenum += st;
 		printf("%s\n %d\n", line, linenum);
