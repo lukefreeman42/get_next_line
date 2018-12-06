@@ -6,7 +6,7 @@
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 09:25:42 by llelias           #+#    #+#             */
-/*   Updated: 2018/12/06 10:00:22 by llelias          ###   ########.fr       */
+/*   Updated: 2018/12/06 10:10:40 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		gnl(int fd, char *b[], char **line)
 	char	*nl_p;
 	char	*tmp;
 
+	st = -2;
 	while (!(nl_p = ft_strchr(b[fd], '\n')) &&
 			(st = read(fd, rb, BUFF_SIZE)) > 0 &&
 			!(rb[st] = '\0'))
@@ -30,7 +31,7 @@ int		gnl(int fd, char *b[], char **line)
 	{
 		if (nl_p && !(*nl_p = '\0'))
 			b[fd] = ft_strdup(++nl_p);
-		*line = ft_strdup(tmp);
+		*line = ft_fstrdup(tmp);
 		if (ft_strlen(b[fd]) || st)
 			return (1);
 	}
