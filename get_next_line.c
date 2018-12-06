@@ -5,60 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/30 07:34:12 by llelias           #+#    #+#             */
-/*   Updated: 2018/12/02 08:12:42 by llelias          ###   ########.fr       */
+/*   Created: 2018/12/04 10:23:55 by llelias           #+#    #+#             */
+/*   Updated: 2018/12/05 15:56:04 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		read_n_store(const int fd, char *storage[])
+int		read_to_b(int fd, t_file *b)
 {
-	int		status;
+	int		st;
 	char	rb[BUFF_SIZE + 1];
 
-	status = -2;
-	while (!ft_strchr(storage[fd], '\n')
-			&& (status = read(fd, rb, BUFF_SIZE))
-			&& status > 0)
+	while ((st = read(fd, rb, BUFF_SIZE)) > 0)
 	{
-		rb[status] = '\0';
-		storage[fd] = ft_fstrjoin(storage[fd], rb, 1);
+		rb[st] = '\0';
+		b->s = ft_fstrjoin(b->s, rb, 1);
+		if (ft_strchr(b->s, '\n'))
+			break;
 	}
-	return (status);
+	return (st);
 }
 
-int		grab_n_line(const int fd, char *storage[], char **line)
+int		grab_line(t_file *b, char **line)
 {
 	char	*nl_p;
 	char	*tmp;
-
-	tmp = storage[fd];
-	if ((nl_p = ft_strchr(storage[fd], '\n')))
+	
+	if (ft_strlen(b->s))
 	{
-		*nl_p = '\0';
-		storage[fd] = ft_strdup(++nl_p);
+		nl_p = ft_strchr(b->s, '\n');
+		tmp = b->s;
+		if (nl_p)
+		{
+			*nl_p = '\0';
+			b->s = ft_strdup(++nl_p);
+		}
 		*line = ft_fstrdup(tmp);
-		return (1);
+		if (ft_strlen(b->s))
+			return (1);
 	}
-	else if (storage[fd])
-		*line = ft_fstrdup(storage[fd]);
 	return (0);
 }
 
-int		get_next_line(const int fd, char **line)
+t_file		*grab_file(int fd, t_file *b)
 {
-	int			status;
-	static char	*storage[MAX_FD];
+	while (b->fd != fd && b->next != NULL)
+		b = b->next;
+	if (b->fd == fd)
+		return (b);
+	else
+		b->next = ft_filenew(fd);
+	return (b->next);
+}
 
-	status = 0;
-	if (fd < 0 || fd >= MAX_FD)
-		return (-1);
-	if (!storage[fd])
-		storage[fd] = ft_strnew(0);
-	if ((status = read_n_store(fd, storage)) == -1)
-		return (-1);
-	if ((status = grab_n_line(fd, storage, line)))
-		return (1);
-	return (0);
+int		get_next_line(int fd, char **line)
+{
+	static t_file	**b;
+	int				rs;
+	*b = grab_file(fd, b);
+	if (*b && *b->fd >= 0 && read_to_b(fd, *b) != -1)
+		return (grab_line(*b, line, rs));
+	return (-1);
 }
