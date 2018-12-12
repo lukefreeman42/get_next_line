@@ -6,11 +6,12 @@
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:16:06 by llelias           #+#    #+#             */
-/*   Updated: 2018/12/09 23:01:47 by llelias          ###   ########.fr       */
+/*   Updated: 2018/12/12 13:36:02 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#define VALID(x) (x > = 0 && x < MAX_FD)
 
 int		gnl(int fd, char **line, char *f[])
 {
