@@ -6,12 +6,11 @@
 /*   By: llelias <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 09:16:06 by llelias           #+#    #+#             */
-/*   Updated: 2018/12/12 13:36:02 by llelias          ###   ########.fr       */
+/*   Updated: 2018/12/12 13:40:14 by llelias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define VALID(x) (x > = 0 && x < MAX_FD)
 
 int		gnl(int fd, char **line, char *f[])
 {
@@ -44,7 +43,7 @@ int		get_next_line(int fd, char **line)
 {
 	static char	*f[MAX_FD];
 
-	if (!VALID(fd))
+	if (fd < 0 || fd >= MAX_FD)
 		return (-1);
 	if (!f[fd])
 		f[fd] = ft_strnew(0);
