@@ -17,4 +17,8 @@ all: $(SRC)
 
 clean:
 	@rm -rf $(NAME).dSYM
-	@rm $(NAME)
+	
+fclean: clean
+	@rm -fr $(NAME)
+
+re: fclean all
